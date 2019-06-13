@@ -86,7 +86,7 @@ def G2nl_dict(zerDic):
 
 
 if __name__ == '__main__':
-    nmax = 5
+    nmax = 8
     zerDic = zernike_dict(nmax)
     G1Dic = G1nl_dict(zerDic)
     G2Dic = G2nl_dict(zerDic)
