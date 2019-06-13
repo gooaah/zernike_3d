@@ -59,17 +59,20 @@ def xn(n):
 
 def G1nl_dict(zerDic):
     G1Dic = {}
+    dG1Dic = {}
     for key, val in zerDic.items():
         _, l = key
         iPoly = val * xn(l+2)
         iPoly = iPoly.integ()
         gPoly = div_xn(iPoly, l+1)
         G1Dic[key] = gPoly
+        dG1Dic[key] = gPoly.deriv()
 
-    return G1Dic
+    return G1Dic, dG1Dic
 
 def G2nl_dict(zerDic):
     G2Dic = {}
+    dG2Dic = {}
     for key, val in zerDic.items():
         _, l = key
         if l <= 1:
@@ -80,16 +83,15 @@ def G2nl_dict(zerDic):
         iPoly = -1*iPoly + iPoly(1)
         gPoly = iPoly * xn(l)
         G2Dic[key] = gPoly
+        dG2Dic[key] = gPoly.deriv()
 
-    return G2Dic
+    return G2Dic, dG2Dic
 
 
 
 if __name__ == '__main__':
     nmax = 5
     zerDic = zernike_dict(nmax)
-    G1Dic = G1nl_dict(zerDic)
-    G2Dic = G2nl_dict(zerDic)
 
     for (n,l), poly in zerDic.items():
         print((n,l),integral_radial(poly,poly), 1/(2*n+3))
