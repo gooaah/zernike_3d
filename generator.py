@@ -87,6 +87,28 @@ def G2nl_dict(zerDic):
 
     return G2Dic, dG2Dic
 
+def Gnl_dict(zerDic):
+    GDic = {}
+    dGDic = {}
+    for key, val in zerDic.items():
+        _, l = key
+        iPoly1 = val * xn(l+2)
+        iPoly1 = iPoly1.integ()
+        gPoly1 = div_xn(iPoly1, l+1)
+
+        if l <= 1:
+            iPoly2 = val * xn(1-l)
+        else:
+            iPoly2 = div_xn(val, l-1)
+        iPoly2 = iPoly2.integ()
+        iPoly2 = -1*iPoly2 + iPoly2(1)
+        gPoly2 = iPoly2 * xn(l)
+
+        gPoly = gPoly1 + gPoly2
+        GDic[key] = gPoly
+        dGDic[key] = gPoly.deriv()
+
+    return GDic, dGDic
 
 
 if __name__ == '__main__':
