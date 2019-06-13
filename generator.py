@@ -1,5 +1,11 @@
 from numpy.polynomial.polynomial import Polynomial
 
+def zernike_integral(poly1, poly2):
+    p = poly1 * poly2 * Polynomial([0,0,1])
+    ip = p.integ()
+    I = ip.coef.sum()
+    return I
+
 nmax = 4
 zerDic = {}
 for n in range(nmax+1):
